@@ -1,2 +1,5 @@
-console.log("hello world!")
-console.log("Hello world!")
+const contacts = require("./contacts");
+
+// contacts.listContacts();
+// contacts.getContactById(3);
+// contacts.removeContact(3);
