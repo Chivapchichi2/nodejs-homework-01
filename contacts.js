@@ -1,6 +1,6 @@
+const { generateKey } = require("crypto");
 const fs = require("fs/promises");
 const path = require("path");
-const { v4 } = require("uuid");
 
 const contactsPath = path.join(__dirname, "db/contacts.json");
 
@@ -44,11 +44,11 @@ async function removeContact(contactId) {
     throw error.message;
   }
 }
-
+const generateId = (list) => list.reduce((acc, el) => acc + el.id, 0);
 async function addContact(name, email, phone) {
   try {
     const contactsList = await listContacts();
-    const newContact = { name, email, phone, id: v4() };
+    const newContact = { name, email, phone, id: generateId(contactsList) };
     await contactsList.push(newContact);
     await fs.writeFile(contactsPath, JSON.stringify(contactsList));
 
